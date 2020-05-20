@@ -27,6 +27,7 @@ public class ApiTest {
                 .get(baseUri)
                 .then()
                 .statusCode(200);
+        Reports.log(Status.PASS, "A api está retornado o Status Code 200 conforme esperado");
     }
 
     @Test
@@ -37,6 +38,8 @@ public class ApiTest {
                 .then()
                 .statusCode(200)
                 .body("id", Matchers.is(1));
+        Reports.log(Status.PASS, "A api está retornado o Id correto");
+
     }
 
     @Test
@@ -47,6 +50,7 @@ public class ApiTest {
                 .then()
                 .statusCode(200)
                 .body(containsString("\"meses\":[\"112\",\"124\",\"136\",\"148\"]"));
+        Reports.log(Status.PASS, "A api está retornado o a lista de Meses correta");
     }
 
     @Test
@@ -57,11 +61,11 @@ public class ApiTest {
                 .then()
                 .statusCode(200)
                 .body(containsString("\"valor\":[\"2.802\",\"3.174\",\"3.564\",\"3.971\"]"));
+        Reports.log(Status.PASS, "A api está retornado o a lista de Valores correta");
     }
 
     @After
     public void tearDown() {
-        Reports.log(Status.PASS,"Validação - StatusCode(200) OK");
         Reports.close();
     }
 }

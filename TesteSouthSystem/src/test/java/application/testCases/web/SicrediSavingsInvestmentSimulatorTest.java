@@ -20,13 +20,13 @@ public class SicrediSavingsInvestmentSimulatorTest {
         Reports.create("Resultado das Execuções de Testes", "DashBoards dos testes");
         driver = Drivers.getFirefoxDriver();
         form = new FormTask(driver);
+        driver.get("https://www.sicredi.com.br/html/ferramenta/simulador-investimento-poupanca/");
+        driver.manage().window().maximize();
     }
 
     @Test
     public void testFormValidDataTest() {
         Reports.startTest("Cenário 01 - Preenchimento do formulário com dados válidos e visualização do formulário de simulação..");
-        driver.get("https://www.sicredi.com.br/html/ferramenta/simulador-investimento-poupanca/");
-        driver.manage().window().maximize();
         Reports.log(Status.INFO, "O Website do Sicredi foi carregado.", ScreenShots.capture(driver));
         form.selectProfile();
         form.enterValueToApply("20,00");
@@ -50,8 +50,6 @@ public class SicrediSavingsInvestmentSimulatorTest {
     @Test
     public void testFormInvalidDataTest() {
         Reports.startTest("Cenário 02 - O associado preencher o valor inferior a “R$ 20.00” e receber a mensagem de orientação “Valor mínimo de R$ 20.00”.");
-        driver.get("https://www.sicredi.com.br/html/ferramenta/simulador-investimento-poupanca/");
-        driver.manage().window().maximize();
         form.selectProfile();
         form.enterValueToApply("19,99");
         form.enterValueToSave("19,99");
@@ -69,8 +67,6 @@ public class SicrediSavingsInvestmentSimulatorTest {
     @Test
     public void testCheckSimulatorPageTest() {
         Reports.startTest("Cenário 03 - Url: https://www.sicredi.com.br/html/ferramenta/simulador-investimento-poupanca/");
-        driver.get("https://www.sicredi.com.br/html/ferramenta/simulador-investimento-poupanca/");
-        driver.manage().window().maximize();
         if(driver.getCurrentUrl().equalsIgnoreCase("https://www.sicredi.com.br/html/ferramenta/simulador-investimento-poupanca/")) {
             Reports.log(Status.PASS, "Validação - A página de Simulação de Investimentos Poupança do Sicredi foi carregada com sucesso.", ScreenShots.capture(driver));
         } else {
